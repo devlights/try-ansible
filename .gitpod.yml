@@ -1,11 +1,8 @@
 image:
   file: .gitpod.Dockerfile
 tasks:
-  - name: Build demo docker image
-    init: docker-compose build
-    command: docker image list
-  - name: Run ansible & demo container
-    init: docker-compose up -d
+  - name: Build & Run ansible & demo container
+    init: docker-compose up -d --build
     command: docker container list
 vscode:
   extensions:
