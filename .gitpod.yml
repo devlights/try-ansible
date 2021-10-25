@@ -1,13 +1,15 @@
 image:
   file: .gitpod.Dockerfile
 tasks:
-  - name: Install Ansible from pip
-    init: python -m pip install ansible
-    command: ansible --version
+  - name: Build demo docker image
+    init: docker-compose build
+    command: docker image list
+  - name: Run ansible & demo container
+    init: docker-compose up -d
+    command: docker container list
 vscode:
   extensions:
     - golang.go
     - ms-azuretools.vscode-docker
-    - redhat.ansible
     - ms-python.python
     - ms-toolsai.jupyter

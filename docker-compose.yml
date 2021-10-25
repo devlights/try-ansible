@@ -1,0 +1,26 @@
+version: "3"
+services:
+  ansible:
+    container_name: ansible001
+    build:
+      context: .
+      dockerfile: Dockerfile.ansible
+    tty: true
+    networks:
+      - net001
+    volumes:
+      - ./playbooks:/playbooks
+    restart: always
+    depends_on:
+      - demo
+  demo:
+    container_name: demo001
+    build:
+      context: .
+      dockerfile: Dockerfile.demo
+    tty: true
+    networks:
+      - net001
+    restart: always
+networks:
+  net001:
