@@ -1,7 +1,13 @@
 image:
   file: .gitpod.Dockerfile
+tasks:
+  - name: Install Ansible from pip
+    init: python -m pip install ansible
+    command: ansible --version
 vscode:
   extensions:
     - golang.go
     - ms-azuretools.vscode-docker
     - redhat.ansible
+    - ms-python.python
+    - ms-toolsai.jupyter
