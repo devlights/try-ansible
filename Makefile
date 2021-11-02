@@ -8,4 +8,6 @@ stop:
 	docker-compose down
 
 exec:
+	rm -f playbooks/ansible.log
+	touch playbooks/ansible.log
 	docker-compose exec ansible bash

@@ -234,3 +234,48 @@ $ export ANSIBLE_CONFIG=/usr/local/ansible/conf/ansible.cfg
 
 4. ```/etc/ansible/ansible.cfg```
 
+設定ファイルの書き方は以下のようになる。
+
+```ini
+[defaults]
+
+forks=15
+log_path=$HOME/.ansible/ansible.log
+host_key_checking=False
+gathering=smart
+```
+
+- forks
+  - ターゲットノードの並列処理を行うプロセス数を設定する
+  - デフォルト値は5
+- log_path
+  - ansible実行コマンドログの配置場所を指定する。
+- host_key_checking
+  - ターゲットノードにSSH接続する際の公開鍵のフィンガープリントチェックを行うかどうか
+  - デフォルト値はTrue
+- gathering
+  - ターゲットノードの詳細情報取得に関する設定を行う。
+    - implicit
+      - キャッシュが無視され、常に情報収集を行う
+    - explicit
+      - キャッシュを利用し、情報収集が行われない
+    - smart
+      - 新規に接続した時は情報収集を行い、キャッシュがある場合は情報収集を行わない
+- gather_subset
+  - ターゲットノードの詳細情報取得を制限できる
+    - all
+      - 全て
+    - network
+      - 最小限の情報とネットワーク情報
+    - hardware
+      - ハードウェア情報を収集する
+    - virtual
+      - 最小限の情報と仮想マシンに関する情報
+- transport
+  - ターゲットノードへの接続方法の設定
+    - smart
+      - OpenSSHが利用できる場合はOpenSSH、そうでなければ Python の Paramiko を利用
+    - paramiko
+      - Python のライブラリ。アクションの度にターゲットノードへ接続する
+    - local
+      - SSHを利用せずに、直接ローカルホストへ接続する
