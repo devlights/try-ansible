@@ -1,0 +1,14 @@
+- hosts: demo
+  tasks:
+    - name: copy file
+      ansible.builtin.copy:
+        src: /playbooks/inventory.ini
+        dest: $HOME
+        mode: 0644
+    - name: confirm
+      ansible.builtin.command:
+        cmd: ls -l
+      register: ret
+    - name: output
+      ansible.builtin.debug:
+        msg: "{{ ret.stdout_lines }}"
