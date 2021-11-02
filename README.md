@@ -279,3 +279,87 @@ gathering=smart
       - Python のライブラリ。アクションの度にターゲットノードへ接続する
     - local
       - SSHを利用せずに、直接ローカルホストへ接続する
+
+## プレイブックと実行結果の関係
+
+以下のようなプレイブックがあるとする。
+
+```yaml
+- hosts: demo
+  tasks:
+    - name: copy file
+      ansible.builtin.copy:
+        src: /playbooks/inventory.ini
+        dest: $HOME
+        mode: 0644
+    - name: confirm
+      ansible.builtin.command:
+        cmd: ls -l
+      register: ret
+    - name: output
+      ansible.builtin.debug:
+        msg: "{{ ret.stdout_lines }}"
+
+```
+
+実行すると以下のようになる。
+
+```sh
+root@2222164ef5f5:/playbooks# ansible-playbook -i inventory.ini fileop/copy_nobackup/playbook.yml 
+
+PLAY [demo] **************************************************************
+
+TASK [Gathering Facts] ***************************************************
+ok: [demo001]
+
+TASK [copy file] *********************************************************
+changed: [demo001]
+
+TASK [confirm] ***********************************************************
+changed: [demo001]
+
+TASK [output] ************************************************************
+ok: [demo001] => {
+    "msg": [
+        "total 4",
+        "-rw-r--r-- 1 root root 178 Nov  2 07:52 inventory.ini"
+    ]
+}
+
+PLAY RECAP ***************************************************************
+demo001                    : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+プレイブックの実行は大きく以下に分類される。
+
+### PLAY
+
+ターゲットノードグループ毎に行うタスクのまとまりを示す。１つのプレイブックの中で複数のPLAYを実行することも可能。
+
+### TASK
+
+個々のタスクは、全てのターゲットノードで実行される。タスクがある分だけモジュールが実行される。
+
+### PLAY RECAP
+
+最終的な実行結果が表示される。
+
+意味は以下のようになる。
+
+- ok
+  - 成功
+  - 既に定義されている状態となっているため、処理を行わなかった
+- changed
+  - 成功
+  - タスクで指定したステータスと異なっていたため、変更を行った
+- skip
+  - 成功
+  - タスクの実行条件に合致しなかったため、処理を行わなかった
+- unreachable
+  - 失敗
+  - ターゲットノードに接続できなかった
+- failed
+  - 失敗
+  - タスクを行った結果、エラーが発生し、定義された状態にならなかった
+
+
