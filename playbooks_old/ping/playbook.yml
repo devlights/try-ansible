@@ -1,4 +1,0 @@
-- hosts: demo
-  tasks:
-    - name: ping
-      ping:
