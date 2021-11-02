@@ -14,14 +14,14 @@ WORKDIR /playbooks
 # Add ansible user
 # 2021-11-01：今の所、rootユーザじゃないとうまくいかないので当面使わない
 # https://stackoverflow.com/questions/25845538/how-to-use-sudo-inside-a-docker-container
-RUN addgroup ansible && addgroup gitpod
-RUN useradd -m gitpod -g gitpod\
-    && echo 'gitpod:gitpod' | chpasswd \
-    && adduser gitpod sudo
-RUN useradd -m ansible -g ansible \
-    && echo 'ansible:ansible' | chpasswd \
-    && adduser ansible sudo \
-    && adduser ansible gitpod
+#RUN addgroup ansible && addgroup gitpod
+#RUN useradd -m gitpod -g gitpod\
+#    && echo 'gitpod:gitpod' | chpasswd \
+#    && adduser gitpod sudo
+#RUN useradd -m ansible -g ansible \
+#    && echo 'ansible:ansible' | chpasswd \
+#    && adduser ansible sudo \
+#    && adduser ansible gitpod
 
 # https://qiita.com/ken992/items/872a90736e6af26ef4ab
 # https://eel3.hatenablog.com/entry/2020/09/12/110814
