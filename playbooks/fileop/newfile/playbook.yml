@@ -1,0 +1,14 @@
+- hosts: demo
+  tasks:
+    - name: touch file
+      ansible.builtin.file:
+        path: $HOME/test.txt
+        state: touch
+        mode: 0644
+    - name: confirm
+      ansible.builtin.command:
+        cmd: ls -l
+      register: ret
+    - name: output
+      ansible.builtin.debug:
+        msg: "{{ ret.stdout_lines }}"
