@@ -1,0 +1,20 @@
+- hosts: demo
+  tasks:
+    - name: add user
+      ansible.builtin.user:
+        name: user01
+        groups: users
+        append: yes
+    - name: confirm
+      #
+      # ansible.builtin.command モジュールは リダイレクトやパイプを取り扱えない（その分セキュリティが高いモジュール）
+      # どうしても利用したい場合は シェルスクリプト にして実行するか、 ansible.builtin.shell モジュールを使う.
+      #
+      # https://stackoverflow.com/questions/24679591/ansible-command-module-says-that-is-illegal-character
+      #
+      ansible.builtin.shell:
+        cmd: cat /etc/passwd | grep user01
+      register: ret
+    - name: output
+      ansible.builtin.debug:
+        msg: "{{ ret.stdout_lines }}"

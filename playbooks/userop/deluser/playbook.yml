@@ -1,0 +1,6 @@
+- hosts: demo
+  tasks:
+    - name: del user
+      ansible.builtin.user:
+        name: user01
+        state: absent
