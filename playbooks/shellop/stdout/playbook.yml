@@ -1,0 +1,13 @@
+#
+# https://bit.ly/3GIlISB
+# https://qiita.com/YumaInaura/items/5bee47677ec903551bb3
+#
+- hosts: demo
+  tasks:
+    - name: ls
+      ansible.builtin.command:
+        cmd: ls -al
+      register: ret
+    - name: output
+      ansible.builtin.debug:
+        msg: "{{ ret.stdout_lines }}"
