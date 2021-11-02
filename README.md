@@ -190,3 +190,30 @@ Ansibleは、YAMLのプレイブックをそのまま実行しているわけで
 プラグインは、Ansibleのコア機能の拡張や、追加機能を提供するコンポーネント。
 モジュールは、プレイブックのタスクとして宣言されるが、プラグインはAnsibleを構成するコア機能に付随する。
 
+
+## Ansible CLI
+
+Ansible CLI とは、Ansibleを利用するためのコマンドラインインターフェースである。
+Ansibleを操作するためのコマンドラインとしては２つ用意されており
+
+- ansible
+- ansible-playbook
+
+となっている。
+
+```ansible``` コマンドは、アドホック（その場限りの）コマンドで、```ansible-playbook```はプレイブックを利用して一連の処理を流したい場合に利用する。
+
+基本、```ansible-playbook``` を用いて運用する。
+
+### ansible コマンドの例
+
+```sh
+$ ansible -i インベントリ ホストグループ -m モジュール名
+```
+
+### ansible-playbook コマンドの例
+
+```sh
+$ ansible-playbook -i インベントリ プレイブック
+```
+
