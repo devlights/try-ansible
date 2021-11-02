@@ -1,6 +1,8 @@
 image:
   file: .gitpod.Dockerfile
 tasks:
+  - name: chown playbooks directory
+    init: sudo chown -R gitpod:gitpod playbooks
   - name: Build & Run ansible & demo container
     init: docker-compose up -d --build
     command: docker container list

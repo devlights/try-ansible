@@ -13,5 +13,3 @@ USER gitpod
 RUN sudo apt-get -q update && \
     sudo apt-get install -yq tree bc nkf && \
     sudo rm -rf /var/lib/apt/lists/*
-
-RUN sudo chown -R gitpod:gitpod /workspace/try-ansible/playbooks
