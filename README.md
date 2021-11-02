@@ -217,3 +217,20 @@ $ ansible -i インベントリ ホストグループ -m モジュール名
 $ ansible-playbook -i インベントリ プレイブック
 ```
 
+## Ansible の 設定ファイル (ansible.cfg)
+
+Ansibleの設定ファイルは ```ansible.cfg``` という名前のファイルとなっている。
+このファイルは置く場所によって読み込まれる優先順位が異なる。
+
+1. 環境変数 ```ANSIBLE_CONFIG``` にファイルパスを設定
+
+```sh
+$ export ANSIBLE_CONFIG=/usr/local/ansible/conf/ansible.cfg
+```
+
+2. カレントディレクトリに存在する設定 (./ansible.cfg)
+
+3. ホームディレクトリに存在する設定 ($HOME/.ansible.cfg)
+
+4. ```/etc/ansible/ansible.cfg```
+
