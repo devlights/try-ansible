@@ -1,3 +1,6 @@
+list:
+	find ./playbooks -type f -name "*.yml" | xargs -I {} echo '{}' | sed -e 's@./playbooks/@@g'
+
 build:
 	docker-compose -f docker-compose.yml build
 
