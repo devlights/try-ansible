@@ -24,8 +24,7 @@
 		"go.goroot": "/usr/local/go"
 	},
 	"extensions": [
-		"golang.Go",
-		"dracula-theme.theme-dracula"
+		"golang.Go"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -36,6 +35,7 @@
 
 	"remoteUser": "vscode",
 	"features": {
-		"docker-from-docker": "20.10"
+		// https://github.com/microsoft/vscode-dev-containers/tree/main/containers/docker-from-docker#using-bind-mounts-when-working-with-docker-inside-the-container
+		"docker-in-docker": "20.10"
 	}
 }
