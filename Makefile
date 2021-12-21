@@ -4,7 +4,7 @@ list:
 build:
 	DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -g)
 
-start: build
+start:
 	DOCKER_BUILDKIT=1 docker-compose up -d
 
 stop:
