@@ -1,9 +1,13 @@
 - hosts: demo
+  become: true
   tasks:
+    - name: add group
+      group:
+        name: "wheel"
     - name: add user
-      ansible.builtin.user:
-        name: user01
-        groups: users
+      user:
+        name: "user01"
+        groups: [ "wheel" ]
         append: yes
     - name: confirm
       #
@@ -12,9 +16,9 @@
       #
       # https://stackoverflow.com/questions/24679591/ansible-command-module-says-that-is-illegal-character
       #
-      ansible.builtin.shell:
+      shell:
         cmd: cat /etc/passwd | grep user01
       register: ret
     - name: output
-      ansible.builtin.debug:
+      debug:
         msg: "{{ ret.stdout_lines }}"
