@@ -2,8 +2,8 @@ image:
   file: .gitpod.Dockerfile
 tasks:
   - name: Build & Run ansible & demo container
-    init: docker-compose up -d --build
-    command: docker container list
+    init: make build
+    command: make start
 vscode:
   extensions:
     - golang.go
