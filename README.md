@@ -5,10 +5,10 @@ This is a repository for learning Ansible using Gitpod. (for myself)
 
 ```sh
 # This is already done in Gitpod prebuild, so you don't need to do it normally.
-$ docker-compose up -d --build   
+$ DOCKER_BUILDKIT=1 docker-compose up -d --build   
 
 # Enter the container for ansible
-$ docker-compose exec ansible bash
+$ DOCKER_BUILDKIT=1 docker-compose exec ansible bash
 
 ansible@xxxx# ansible-playbook -i inventry.ini apt/playbook.yml
 ```
@@ -24,6 +24,8 @@ ansible@xxxx# ansible-playbook -i inventry.ini apt/playbook.yml
 - [docker-composeの--build-argオプションを利用して、Dockerfileでビルドされるコンテナまで環境変数を渡す](https://qiita.com/yuta_vamdemic/items/7be33ade88a008255930)
 - [docker-composeから環境変数をDockerfileに渡す方法](https://qiita.com/Targityen/items/2717511ca9f12c1c667f)
 - [Dockerの--initフラグについて](https://christina04.hatenablog.com/entry/docker-init)
+- [dockerコンテナ起動時にシェルを実行する](https://qiita.com/ken992/items/872a90736e6af26ef4ab)
+- [Dockerのコンテナ起動時にバックグラウンド・プロセスとして動作するデーモンを起動させたい](https://eel3.hatenablog.com/entry/2020/09/12/110814)
 
 ## メモ
 
