@@ -5,17 +5,25 @@ This is a repository for learning Ansible using Gitpod. (for myself)
 
 ```sh
 # This is already done in Gitpod prebuild, so you don't need to do it normally.
-$ docker-compose up -d              
+$ docker-compose up -d --build   
 
 # Enter the container for ansible
 $ docker-compose exec ansible bash
 
-root@xxxx# ansible-playbook -i apt/install/inventry.ini apt/install/playbook.yml
+ansible@xxxx# ansible-playbook -i inventry.ini apt/playbook.yml
 ```
 
 ## 参考文献
 
 - Ansible 実践ガイド 第３版 (ISBN: 9784295007647)
+
+## 参考情報
+
+- [Goメモ-165 (Go 1.18 Beta1 がリリース)](https://devlights.hatenablog.com/entry/2021/12/15/141759)
+- [Docker で環境変数をホストからコンテナに渡す方法](https://qiita.com/KEINOS/items/518610bc2fdf5999acf2)
+- [docker-composeの--build-argオプションを利用して、Dockerfileでビルドされるコンテナまで環境変数を渡す](https://qiita.com/yuta_vamdemic/items/7be33ade88a008255930)
+- [docker-composeから環境変数をDockerfileに渡す方法](https://qiita.com/Targityen/items/2717511ca9f12c1c667f)
+- [Dockerの--initフラグについて](https://christina04.hatenablog.com/entry/docker-init)
 
 ## メモ
 
@@ -361,5 +369,3 @@ demo001                    : ok=4    changed=2    unreachable=0    failed=0    s
 - failed
   - 失敗
   - タスクを行った結果、エラーが発生し、定義された状態にならなかった
-
-
