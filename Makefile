@@ -2,18 +2,17 @@ list:
 	find ./playbooks -type f -name "*.yml" | xargs -I {} echo '{}' | sed -e 's@./playbooks/@@g'
 
 build:
-	docker-compose -f docker-compose.yml build
+	DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -g)
 
-start:
-	docker-compose up -d
+start: build
+	DOCKER_BUILDKIT=1 docker-compose up -d
 
 stop:
-	docker-compose down
+	DOCKER_BUILDKIT=1 docker-compose down
 
 exec:
 	rm -f playbooks/ansible.log
-	touch playbooks/ansible.log
-	docker-compose exec ansible bash
+	DOCKER_BUILDKIT=1 docker-compose exec ansible bash
 
 demo:
-	docker-compose exec demo bash
+	DOCKER_BUILDKIT=1 docker-compose exec demo bash

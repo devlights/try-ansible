@@ -2,6 +2,7 @@
 # https://cloudpack.media/32424
 # https://stackoverflow.com/questions/32429259/ansible-fails-with-bin-sh-1-usr-bin-python-not-found
 - hosts: demo
+  become: true
   gather_facts: yes
 #
 # もし、相手先にPythonが入っていない場合は以下のようにする

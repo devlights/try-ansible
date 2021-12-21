@@ -1,28 +1,31 @@
+# syntax=docker/dockerfile:1-labs
 FROM debian:latest
 
-RUN mkdir -p /playbooks
+ARG UID
+ARG GID
 
-RUN apt-get update -q \
-    && apt-get install -yq sudo iputils-ping net-tools dnsutils procps gnupg2 nano vim sshpass \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 \
-    && echo 'deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main' >> /etc/apt/sources.list \
-    && apt-get install -y ansible \
-    && rm -rf /var/lib/apt/lists/*
+RUN <<EOF
+    apt-get update -q
+    apt-get install -yq sudo iputils-ping net-tools dnsutils procps gnupg2 nano vim sshpass
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+    echo 'deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main' >> /etc/apt/sources.list
+    apt-get install -y ansible
+    rm -rf /var/lib/apt/lists/*
+EOF
 
+RUN <<EOF
+    groupadd --gid ${GID} ansible
+    useradd -m -s /bin/bash --uid ${UID} --gid ${GID} ansible
+    echo 'ansible:ansible' | chpasswd
+    echo '%ansible ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ansible
+    mkdir -p /playbooks
+    chown -R ansible:ansible /playbooks
+EOF
+
+USER ansible
 WORKDIR /playbooks
 
-# Add ansible user
-# 2021-11-01：今の所、rootユーザじゃないとうまくいかないので当面使わない
-# https://stackoverflow.com/questions/25845538/how-to-use-sudo-inside-a-docker-container
-#RUN addgroup ansible && addgroup gitpod
-#RUN useradd -m gitpod -g gitpod\
-#    && echo 'gitpod:gitpod' | chpasswd \
-#    && adduser gitpod sudo
-#RUN useradd -m ansible -g ansible \
-#    && echo 'ansible:ansible' | chpasswd \
-#    && adduser ansible sudo \
-#    && adduser ansible gitpod
+CMD [ "bash", "./startup.sh" ]
 
 # https://qiita.com/ken992/items/872a90736e6af26ef4ab
 # https://eel3.hatenablog.com/entry/2020/09/12/110814
-CMD [ "bash", "./startup.sh" ]

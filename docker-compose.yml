@@ -2,25 +2,33 @@ version: "3"
 services:
   ansible:
     container_name: ansible001
+    init: true
     build:
       context: .
       dockerfile: Dockerfile.ansible
+      args:
+        - UID=1000
+        - GID=1000
     tty: true
     networks:
       - net001
     volumes:
       - ./playbooks:/playbooks
-    restart: always
+    restart: "no"
     depends_on:
       - demo
   demo:
     container_name: demo001
+    init: true
     build:
       context: .
       dockerfile: Dockerfile.demo
+      args:
+        - UID=1000
+        - GID=1000
     tty: true
     networks:
       - net001
-    restart: always
+    restart: "no"
 networks:
   net001:
