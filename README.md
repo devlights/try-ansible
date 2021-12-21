@@ -5,10 +5,11 @@ This is a repository for learning Ansible using Gitpod. (for myself)
 
 ```sh
 # This is already done in Gitpod prebuild, so you don't need to do it normally.
-$ DOCKER_BUILDKIT=1 docker-compose up -d --build   
+$ make build
+$ make start
 
 # Enter the container for ansible
-$ DOCKER_BUILDKIT=1 docker-compose exec ansible bash
+$ make exec
 
 ansible@xxxx# ansible-playbook -i inventry.ini apt/playbook.yml
 ```
