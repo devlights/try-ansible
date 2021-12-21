@@ -26,6 +26,7 @@ ansible@xxxx# ansible-playbook -i inventry.ini apt/playbook.yml
 - [Dockerの--initフラグについて](https://christina04.hatenablog.com/entry/docker-init)
 - [dockerコンテナ起動時にシェルを実行する](https://qiita.com/ken992/items/872a90736e6af26ef4ab)
 - [Dockerのコンテナ起動時にバックグラウンド・プロセスとして動作するデーモンを起動させたい](https://eel3.hatenablog.com/entry/2020/09/12/110814)
+- [SSHでログイン出来るコンテナの作り方(Ubuntu18対応版)](https://qiita.com/y-vectorfield/items/587d3f3a6eec8f251f3c)
 
 ## メモ
 
